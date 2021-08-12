@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Mastectomy_Procedure__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox set to yes (checked) if specified diagnoses are in the patient&#39;s diagnosis list</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Automatically set to yes (checked) if specified diagnoses are in the patient&#39;s diagnosis list</inlineHelpText>
+    <label>Mastectomy Procedure</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

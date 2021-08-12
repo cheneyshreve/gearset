@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Notes about the relationship between the originating account and the related account.  These should be long-term notes that remain true about the relationship rather than the individuals. --></help>
+        <label><!-- Relationship Notes --></label>
+        <name>Relationship_Notes__c</name>
+    </CustomFieldTranslation>

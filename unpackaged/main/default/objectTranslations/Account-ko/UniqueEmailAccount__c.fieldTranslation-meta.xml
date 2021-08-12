@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- The Patient Account that has a Unique Email address equal to the email address on this Account. --></help>
+        <label><!-- Unique Email Match Account --></label>
+        <name>UniqueEmailAccount__c</name>
+        <relationshipLabel><!-- Accounts (Unique Email Match Account) --></relationshipLabel>
+    </CustomFieldTranslation>

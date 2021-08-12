@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Content Preferences --></label>
+        <name>Content_Preferences__c</name>
+        <picklistValues>
+            <masterLabel>Announcements</masterLabel>
+            <translation><!-- Announcements --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Facility Openings</masterLabel>
+            <translation><!-- Facility Openings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Healthy Eating</masterLabel>
+            <translation><!-- Healthy Eating --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newsletters</masterLabel>
+            <translation><!-- Newsletters --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Outdoor Activities</masterLabel>
+            <translation><!-- Outdoor Activities --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

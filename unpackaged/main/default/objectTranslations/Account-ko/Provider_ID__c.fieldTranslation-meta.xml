@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Provider&apos;s SER ID from EPIC --></help>
+        <label><!-- Provider ID --></label>
+        <name>Provider_ID__c</name>
+    </CustomFieldTranslation>

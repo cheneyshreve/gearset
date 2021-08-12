@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- The wealth score provided by the development team. --></help>
+        <label><!-- Wealth Score --></label>
+        <name>Wealth_Score__c</name>
+    </CustomFieldTranslation>

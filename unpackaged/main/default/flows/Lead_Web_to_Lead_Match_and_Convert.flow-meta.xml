@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Action to call invocable Apex to convert Lead into a new Person Account.</description>
+        <name>Convert_Into_New_Account</name>
+        <label>Convert Into New Account</label>
+        <locationX>314</locationX>
+        <locationY>887</locationY>
+        <actionName>ConvertLeadsInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>convertedStatus</name>
+            <value>
+                <stringValue>Webform Submission</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>createOpportunity</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Action to call invocable Apex to convert Lead into the Person Account we found.</description>
+        <name>Convert_to_Found_Person_Account</name>
+        <label>Convert to Found Person Account</label>
+        <locationX>50</locationX>
+        <locationY>887</locationY>
+        <actionName>ConvertLeadsInvocable</actionName>
+        <actionType>apex</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>accountId</name>
+            <value>
+                <elementReference>QueriedAccount.Id</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>convertedStatus</name>
+            <value>
+                <stringValue>Webform Submission</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>createOpportunity</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>leadId</name>
+            <value>
+                <elementReference>$Record.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Apex Action to run a SOQL query looking for existing Accounts with the same Unique Email already populated.</description>
+        <name>Query_for_existing_account_with_same_email</name>
+        <label>Query for existing account with same email</label>
+        <locationX>182</locationX>
+        <locationY>311</locationY>
+        <actionName>ExecuteSOQL</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Loop_through_List</targetReference>
+        </connector>
+        <dataTypeMappings>
+            <typeName>U__sObjects</typeName>
+            <typeValue>Account</typeValue>
+        </dataTypeMappings>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>soqlQuery</name>
+            <value>
+                <elementReference>QueryString</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>QueriedAccounts</assignToReference>
+            <name>sObjects</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <description>Assigns the current item (which should be the only item!) in the List as its own variable so we can refer to it later in the Flow.</description>
+        <name>Assign_individual_account_variable</name>
+        <label>Assign individual account variable</label>
+        <locationX>270</locationX>
+        <locationY>551</locationY>
+        <assignmentItems>
+            <assignToReference>QueriedAccount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_through_List</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_through_List</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Decision point where we check whether the previous Get Records step actually found a matching record.</description>
+        <name>Matching_Person_Account_found</name>
+        <label>Matching Person Account found?</label>
+        <locationX>182</locationX>
+        <locationY>767</locationY>
+        <defaultConnector>
+            <targetReference>Convert_Into_New_Account</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - convert Lead to new record</defaultConnectorLabel>
+        <rules>
+            <name>Yes_convert_Lead_to_existing_record</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>QueriedAccount</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Convert_to_Found_Person_Account</targetReference>
+            </connector>
+            <label>Yes - convert Lead to existing record</label>
+        </rules>
+    </decisions>
+    <description>Flow that fires when Lead is created from a Web to Lead form and automatically finds a matching Person Account or converts to a new one if it can&#39;t find a match.</description>
+    <interviewLabel>Lead - Web to Lead Match and Convert {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Lead - Web to Lead Match and Convert</label>
+    <loops>
+        <description>Apex Action SOQL query returns a List; we can only ever find one record but we need to assign that record as its own variable.</description>
+        <name>Loop_through_List</name>
+        <label>Loop through List</label>
+        <locationX>182</locationX>
+        <locationY>431</locationY>
+        <collectionReference>QueriedAccounts</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_individual_account_variable</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Matching_Person_Account_found</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Query_for_existing_account_with_same_email</targetReference>
+        </connector>
+        <object>Lead</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Variable to store the individual Account that would match this email address.</description>
+        <name>QueriedAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>Variable to store Accounts queried in Apex Action</description>
+        <name>QueriedAccounts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>Variable to concatenate various other fields to create a fully query string.</description>
+        <name>QueryString</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>SELECT Id, PersonContactId, UniqueEmailAccount__c FROM Account WHERE UniqueEmailAccount__c = &#39;{!$Record.Email}&#39; LIMIT 1</stringValue>
+        </value>
+    </variables>
+</Flow>

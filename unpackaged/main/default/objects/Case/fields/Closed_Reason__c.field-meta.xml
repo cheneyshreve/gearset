@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Closed_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Closed Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Appointment Scheduled</fullName>
+                <default>false</default>
+                <label>Appointment Scheduled</label>
+            </value>
+            <value>
+                <fullName>Could Not Reach</fullName>
+                <default>false</default>
+                <label>Could Not Reach</label>
+            </value>
+            <value>
+                <fullName>Declined</fullName>
+                <default>false</default>
+                <label>Declined</label>
+            </value>
+            <value>
+                <fullName>Forms Completed</fullName>
+                <default>false</default>
+                <label>Forms Completed</label>
+            </value>
+            <value>
+                <fullName>Message Sent to MA</fullName>
+                <default>false</default>
+                <label>Message Sent to MA</label>
+            </value>
+            <value>
+                <fullName>Message Sent to Provider</fullName>
+                <default>false</default>
+                <label>Message Sent to Provider</label>
+            </value>
+            <value>
+                <fullName>Provided Billing Information</fullName>
+                <default>false</default>
+                <label>Provided Billing Information</label>
+            </value>
+            <value>
+                <fullName>Provided Lab Orders and Lab Information</fullName>
+                <default>false</default>
+                <label>Provided Lab Orders and Lab Information</label>
+            </value>
+            <value>
+                <fullName>Provided Medical Records</fullName>
+                <default>false</default>
+                <label>Provided Medical Records</label>
+            </value>
+            <value>
+                <fullName>Provided Referral Information</fullName>
+                <default>false</default>
+                <label>Provided Referral Information</label>
+            </value>
+            <value>
+                <fullName>Provided Requested Information</fullName>
+                <default>false</default>
+                <label>Provided Requested Information</label>
+            </value>
+            <value>
+                <fullName>Refilled Prescription</fullName>
+                <default>false</default>
+                <label>Refilled Prescription</label>
+            </value>
+            <value>
+                <fullName>Sent Notes to Provider</fullName>
+                <default>false</default>
+                <label>Sent Notes to Provider</label>
+            </value>
+            <value>
+                <fullName>Sent Out Labs</fullName>
+                <default>false</default>
+                <label>Sent Out Labs</label>
+            </value>
+            <value>
+                <fullName>Sent Pharmacy Information</fullName>
+                <default>false</default>
+                <label>Sent Pharmacy Information</label>
+            </value>
+            <value>
+                <fullName>Transferred Caller</fullName>
+                <default>false</default>
+                <label>Transferred Caller</label>
+            </value>
+            <value>
+                <fullName>Outdated Case</fullName>
+                <default>false</default>
+                <label>Outdated Case</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

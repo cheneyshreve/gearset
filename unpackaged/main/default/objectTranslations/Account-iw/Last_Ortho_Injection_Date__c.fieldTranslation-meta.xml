@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Date of last ortho injection per Epic CPT codes --></help>
+        <label><!-- Last Ortho Injection Date --></label>
+        <name>Last_Ortho_Injection_Date__c</name>
+    </CustomFieldTranslation>

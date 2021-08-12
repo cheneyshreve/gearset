@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Visit</fullName>
+    <active>true</active>
+    <label>Visit</label>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>No-show</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Scheduled</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Type__c</picklist>
+        <values>
+            <fullName>Consult</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Follow-Up</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>New Patient</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <name>Assign_Location_based_on_formula</name>
+        <label>Assign Location based on formula</label>
+        <locationX>176</locationX>
+        <locationY>253</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Location__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>TextFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Origin</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CaseOriginFormula</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>0123h0000006lsNAAQ</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <formulas>
+        <description>Formula that looks for &quot;Fax&quot; or &quot;Voice msg&quot; and sets case origin accordingly</description>
+        <name>CaseOriginFormula</name>
+        <dataType>String</dataType>
+        <expression>IF(CONTAINS(LOWER({!$Record.Subject}), &quot;Voice msg&quot;), &quot;Voicemail&quot;, 
+      IF(CONTAINS(LOWER({!$Record.Subject}), &quot;fax&quot;), &quot;Fax&quot;, null)
+)</expression>
+    </formulas>
+    <formulas>
+        <name>TextFormula</name>
+        <dataType>String</dataType>
+        <expression>CASE(
+   LOWER( LEFT($Record.SuppliedEmail,2)),
+        &quot;rb&quot;, &quot;Riverbrock&quot;,
+        &quot;apt&quot;, &quot;Airport Towers&quot;,
+        &quot;so&quot;, &quot;Women&#39;s Health&quot;,
+       &quot;ca&quot;, &quot;Citrus Towers MSS&quot;,
+null
+)</expression>
+    </formulas>
+    <interviewLabel>Case - Assign Location based on Email2Case info {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Assign Location based on Email2Case info</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Assign_Location_based_on_formula</targetReference>
+        </connector>
+        <filterLogic>or</filterLogic>
+        <filters>
+            <field>SuppliedName</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

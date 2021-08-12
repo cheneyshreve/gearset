@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Smoking Status --></label>
+        <name>Smoking_Status__c</name>
+        <picklistValues>
+            <masterLabel>Former Smoker</masterLabel>
+            <translation><!-- Former Smoker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Heavy Smoker</masterLabel>
+            <translation><!-- Heavy Smoker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Never a Smoker</masterLabel>
+            <translation><!-- Never a Smoker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Occasional Smoker</masterLabel>
+            <translation><!-- Occasional Smoker --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

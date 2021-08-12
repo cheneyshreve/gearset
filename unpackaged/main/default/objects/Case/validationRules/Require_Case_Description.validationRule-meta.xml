@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_Case_Description</fullName>
+    <active>true</active>
+    <description>Requires a description if Case Origin = Manual Entry</description>
+    <errorConditionFormula>AND(
+$RecordType.Name = &quot;Wellness Tracking&quot;,
+ ISBLANK( Description ),
+ISPICKVAL(  Origin  , &quot;Manual Entry&quot;))</errorConditionFormula>
+    <errorMessage>Because this case was manually entered, please enter a &#39;Description&#39;</errorMessage>
+</ValidationRule>

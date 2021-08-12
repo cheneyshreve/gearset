@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Closed Reason --></label>
+        <name>Closed_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Appointment Scheduled</masterLabel>
+            <translation><!-- Appointment Scheduled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Could Not Reach</masterLabel>
+            <translation><!-- Could Not Reach --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Forms Completed</masterLabel>
+            <translation><!-- Forms Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Message Sent to MA</masterLabel>
+            <translation><!-- Message Sent to MA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Message Sent to Provider</masterLabel>
+            <translation><!-- Message Sent to Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Outdated Case</masterLabel>
+            <translation><!-- Outdated Case --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provided Billing Information</masterLabel>
+            <translation><!-- Provided Billing Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provided Lab Orders and Lab Information</masterLabel>
+            <translation><!-- Provided Lab Orders and Lab Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provided Medical Records</masterLabel>
+            <translation><!-- Provided Medical Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provided Referral Information</masterLabel>
+            <translation><!-- Provided Referral Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provided Requested Information</masterLabel>
+            <translation><!-- Provided Requested Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refilled Prescription</masterLabel>
+            <translation><!-- Refilled Prescription --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Notes to Provider</masterLabel>
+            <translation><!-- Sent Notes to Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Out Labs</masterLabel>
+            <translation><!-- Sent Out Labs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Pharmacy Information</masterLabel>
+            <translation><!-- Sent Pharmacy Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transferred Caller</masterLabel>
+            <translation><!-- Transferred Caller --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <description>Assigns the Person Account we just retrieved as the Person Account attached to this case.</description>
+        <name>Assign_Account_as_Person_Account</name>
+        <label>Assign Account as Person Account</label>
+        <locationX>314</locationX>
+        <locationY>493</locationY>
+        <assignmentItems>
+            <assignToReference>PersonAccountOnCase</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Account</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assigns_correct_values_to_both_Contact_and_Account_on_case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the Person Account we just retrieved as the Person Account attached to this case</description>
+        <name>Assign_Contact_as_PersonAccount</name>
+        <label>Assign Contact as PersonAccount</label>
+        <locationX>50</locationX>
+        <locationY>493</locationY>
+        <assignmentItems>
+            <assignToReference>PersonAccountOnCase</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Contact</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assigns_correct_values_to_both_Contact_and_Account_on_case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Using the Person Account we&#39;ve looked up, populates all necessary values on the Case.</description>
+        <name>Assigns_correct_values_to_both_Contact_and_Account_on_case</name>
+        <label>Assigns correct values to both Contact and Account on case</label>
+        <locationX>182</locationX>
+        <locationY>709</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.AccountId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>PersonAccountOnCase.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.ContactId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>PersonAccountOnCase.PersonContactId</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>This decision point checks whether the Contact or the Account is populated on the Case</description>
+        <name>Contact_or_Account_populated</name>
+        <label>Contact or Account populated?</label>
+        <locationX>182</locationX>
+        <locationY>253</locationY>
+        <defaultConnector>
+            <targetReference>Get_Account</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Account populated</defaultConnectorLabel>
+        <rules>
+            <name>Contact_populated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.ContactId</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_Contact</targetReference>
+            </connector>
+            <label>Contact populated</label>
+        </rules>
+    </decisions>
+    <description>This flow automatically updates the Account on a Case when the Contact is filled out, and vice versa.  Assumes that Cases will always be assigned to Person Accounts and not any other type of Account.</description>
+    <interviewLabel>Case - Align Contact and Account for matching Person Account {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Case - Align Contact and Account for matching Person Account</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Gets the Person Account matching the Account ID we had specified on the original Case.</description>
+        <name>Get_Account</name>
+        <label>Get Account</label>
+        <locationX>314</locationX>
+        <locationY>373</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Account_as_Person_Account</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.AccountId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <description>This step fetches information about the Account with the PersonContactID specified in the ContactId field of the original Case.</description>
+        <name>Get_Contact</name>
+        <label>Get Contact</label>
+        <locationX>50</locationX>
+        <locationY>373</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_Contact_as_PersonAccount</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>PersonContactId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.ContactId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Contact_or_Account_populated</targetReference>
+        </connector>
+        <filterLogic>(1 AND 2) OR (3 AND 4)</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ContactId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>AccountId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <filters>
+            <field>ContactId</field>
+            <operator>IsNull</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </filters>
+        <object>Case</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>This variable represents the person account we are tying to the case.</description>
+        <name>PersonAccountOnCase</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>

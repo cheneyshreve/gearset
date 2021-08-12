@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Number of eCheck-In activities in My Health Connection (Epic MyChart Patient Portal) in the past 12 months (rolling) --></help>
+        <label><!-- MHC eCheck-in Volume --></label>
+        <name>MHC_eCheck_in_Volume__c</name>
+    </CustomFieldTranslation>

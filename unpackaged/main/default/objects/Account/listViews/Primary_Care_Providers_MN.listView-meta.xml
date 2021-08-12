@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Primary_Care_Providers_MN</fullName>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>PC_DEPARTMENT</columns>
+    <columns>Department_Specialty__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PersonAccount.Provider</value>
+    </filters>
+    <label>Primary Care Providers - MN</label>
+</ListView>

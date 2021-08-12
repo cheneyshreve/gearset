@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <recordTypes>
+        <description><!-- For outlining FY strategic plan --></description>
+        <label><!-- BD Planning --></label>
+        <name>BD_Planning</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- For tracking sales cycles for Employer Heath service offerings --></description>
+        <label><!-- Employer Sales --></label>
+        <name>Employer_Sales</name>
+    </recordTypes>
+</CustomObjectTranslation>

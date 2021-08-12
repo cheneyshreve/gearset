@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Patient_receives_Navigation_Assistance__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This checkbox indicates whether a team at the health system is currently offering special assistance in navigating between departments and sites.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>This checkbox indicates whether a team at the health system is currently offering special assistance in navigating between departments and sites.</inlineHelpText>
+    <label>Patient receives Navigation Assistance</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

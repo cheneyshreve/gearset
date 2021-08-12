@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Identify the relationship to the health system --></help>
+        <label><!-- Relationship --></label>
+        <name>Relationship__c</name>
+        <picklistValues>
+            <masterLabel>Affiliated</masterLabel>
+            <translation><!-- Affiliated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employed</masterLabel>
+            <translation><!-- Employed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>External</masterLabel>
+            <translation><!-- External --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

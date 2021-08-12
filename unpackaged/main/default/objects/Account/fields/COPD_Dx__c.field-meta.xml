@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>COPD_Dx__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox set to yes (checked) if specified diagnoses are in the patient&#39;s diagnosis list and present within the last year</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Automatically set to yes (checked) if specified diagnoses are in the patient&#39;s diagnosis list and present within the last year</inlineHelpText>
+    <label>COPD Dx</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

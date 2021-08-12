@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Provider</fullName>
+    <fields>RecordTypeId</fields>
+    <fields>Name</fields>
+    <fields>Practice_Name__c</fields>
+    <fields>Provider_ID__c</fields>
+    <fields>NPI__c</fields>
+    <label>Provider</label>
+</CompactLayout>

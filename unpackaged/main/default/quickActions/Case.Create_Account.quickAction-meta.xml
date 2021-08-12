@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Quick action to launch the Find or Add Account flow to update the Account record.</description>
+    <flowDefinition>Find_or_Add_Account</flowDefinition>
+    <label>Create Account</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <type>Flow</type>
+</QuickAction>

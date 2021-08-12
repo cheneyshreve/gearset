@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Date of last annual primary care visit per Epic CPT codes --></help>
+        <label><!-- Last Annual Primary Care Visit Date --></label>
+        <name>Last_Annual_Primary_Care_Visit_Date__c</name>
+    </CustomFieldTranslation>

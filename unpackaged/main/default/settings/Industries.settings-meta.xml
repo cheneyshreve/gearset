@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IndustriesSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableAccountScoreEnabled>false</enableAccountScoreEnabled>
+    <enableClinicalDataModel>false</enableClinicalDataModel>
+    <enableEinsteinVisits>false</enableEinsteinVisits>
+    <enableMedicalDeviceEnabled>false</enableMedicalDeviceEnabled>
+    <enableMultipleCareProgramEnrolleeOrgPref>false</enableMultipleCareProgramEnrolleeOrgPref>
+    <enableObjectDetection>false</enableObjectDetection>
+    <enablePatientAppointmentSchedulingOrgPref>false</enablePatientAppointmentSchedulingOrgPref>
+    <enableProviderSearchSyncOrgPref>false</enableProviderSearchSyncOrgPref>
+    <enableVisitCalendarSync>false</enableVisitCalendarSync>
+    <enableVisitInventoryEnabled>false</enableVisitInventoryEnabled>
+</IndustriesSettings>

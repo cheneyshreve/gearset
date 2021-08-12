@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <layouts>
+        <layout>Consumer Page Layout</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label><!-- Clinical --></label>
+            <section>Clinical</section>
+        </sections>
+        <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Demographic &amp; Patient Information --></label>
+            <section>Demographic &amp; Patient Information</section>
+        </sections>
+        <sections>
+            <label><!-- Financial --></label>
+            <section>Financial</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Marketing Consumer Page Layout</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Demographic &amp; Patient Information --></label>
+            <section>Demographic &amp; Patient Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>VIP Consumer Layout</layout>
+        <layoutType>PersonAccount</layoutType>
+        <sections>
+            <label><!-- Clinical --></label>
+            <section>Clinical</section>
+        </sections>
+        <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Demographic &amp; Patient Information --></label>
+            <section>Demographic &amp; Patient Information</section>
+        </sections>
+        <sections>
+            <label><!-- Financial --></label>
+            <section>Financial</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Private Note --></label>
+        <name>CreateNewPrivateNote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Engagement Last 31 Days --></label>
+        <name>Engagement_Last_31_Days</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Clinical --></label>
+        <name>Field_Update_Clinical</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Clinical/Care Management Criteria --></label>
+        <name>Field_Update_Clinical_Care_Management_Criteria</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Clinical Effectiveness --></label>
+        <name>Field_Update_Clinical_Effectiveness</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update: Corporate Partnership --></label>
+        <name>Field_Update_Corporate_Partnership</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Disease_Management --></label>
+        <name>Field_Update_Disease_Management</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Finance --></label>
+        <name>Field_Update_Finance</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_IT Criteria --></label>
+        <name>Field_Update_IT_Criteria</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Onboarding --></label>
+        <name>Field_Update_Onboarding</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Operational Criteria --></label>
+        <name>Field_Update_Operational_Criteria</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_SNF Specific --></label>
+        <name>Field_Update_SNF_Specific</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Vendor Details --></label>
+        <name>Field_Update_Vendor_Details</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Lifetime Engagement --></label>
+        <name>Lifetime_Engagement</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Log Lunch &amp; Learn --></label>
+        <name>Log_Lunch_Learn</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Advancement Request --></label>
+        <name>New_Advancement_Request</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Case --></label>
+        <name>New_Case</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Onsite Visit --></label>
+        <name>Onsite_Visit</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Outreach Results --></label>
+        <name>Outreach_Results</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Photo Update Action --></label>
+        <name>Photo_Update_Action</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Referral Metrics --></label>
+        <name>Referral_Metrics</name>
+    </quickActions>
+    <recordTypes>
+        <description><!-- Represents groups in the community (churches, gyms, non-profits, associations, rotary, etc.) that influence prospects and patients --></description>
+        <label><!-- Community Group --></label>
+        <name>Community_Group</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Custom Consumer Household record type --></description>
+        <label><!-- Consumer Household --></label>
+        <name>Consumer_Household</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Default --></label>
+        <name>Default</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Hospital &amp; Clinic Departments or Locations --></description>
+        <label><!-- Departments --></label>
+        <name>Departments</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Employer --></description>
+        <label><!-- Employer --></label>
+        <name>Employer</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Represents a department or other medical facility --></description>
+        <label><!-- Department --></label>
+        <name>Facility</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Health System Hospital --></description>
+        <label><!-- Hospital --></label>
+        <name>Hospital</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Represents a current patient or prospect --></description>
+        <label><!-- Patient --></label>
+        <name>Patient</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Practice (Employed, Affiliated, Independent) --></description>
+        <label><!-- Practice --></label>
+        <name>Practice</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Generic Accounts (Business) --></description>
+        <label><!-- Standard --></label>
+        <name>Standard</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Billing --></label>
+        <name>Billing</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Create_Case_from_Webforms__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox indicating that when webform Leads are associated with this Campaign, we should create Cases automatically.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Checkbox indicating that when webform Leads are associated with this Campaign, we should create Cases automatically.</inlineHelpText>
+    <label>Create Case from Webforms</label>
+    <type>Checkbox</type>
+</CustomField>

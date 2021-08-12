@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- This checkbox indicates whether a team at the health system is currently offering special assistance in navigating between departments and sites. --></help>
+        <label><!-- Patient receives Navigation Assistance --></label>
+        <name>Patient_receives_Navigation_Assistance__c</name>
+    </CustomFieldTranslation>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Result__c</fullName>
+    <externalId>false</externalId>
+    <label>Call Result</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>- Choose a call result -</fullName>
+                <default>true</default>
+                <label>- Choose a call result -</label>
+            </value>
+            <value>
+                <fullName>Busy Signal</fullName>
+                <default>false</default>
+                <label>Busy Signal</label>
+            </value>
+            <value>
+                <fullName>Person Answered</fullName>
+                <default>false</default>
+                <label>Person Answered</label>
+            </value>
+            <value>
+                <fullName>Voicemail</fullName>
+                <default>false</default>
+                <label>Voicemail</label>
+            </value>
+            <value>
+                <fullName>Wrong Number</fullName>
+                <default>false</default>
+                <label>Wrong Number</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

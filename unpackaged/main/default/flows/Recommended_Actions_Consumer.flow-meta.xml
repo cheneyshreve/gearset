@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <description>Assigns the new values to the person account related to this case</description>
+        <name>Assign_new_values_to_person_account_0</name>
+        <label>Assign new values to person account</label>
+        <locationX>50</locationX>
+        <locationY>398</locationY>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Insurance__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NewInsurance</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId.AccountId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Last_PCP_Visit__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Schedule_New_Visit</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.New_Clinic_Opt_In__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_values_to_Campaign_Member</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the new values to the person account related to this case</description>
+        <name>Assign_new_values_to_person_account_0_0</name>
+        <label>Assign new values to person account</label>
+        <locationX>314</locationX>
+        <locationY>398</locationY>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Insurance__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>NewInsurance</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Id</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId.AccountId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>AttachedPersonAccount.Last_PCP_Visit__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Schedule_New_Visit</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_Person_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the values to the campaign member that will relate it to the appropriate campaign and person account.</description>
+        <name>Assign_values_to_Campaign_Member</name>
+        <label>Assign values to Campaign Member</label>
+        <locationX>50</locationX>
+        <locationY>518</locationY>
+        <assignmentItems>
+            <assignToReference>NewCampaignMember.ContactId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId.ContactId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewCampaignMember.CampaignId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>7014R000001yb7gQAA</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>NewCampaignMember.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Sent</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_New_Campaign_Member</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Decision point to check whether the patient has opted in to new clinic marketing emails.</description>
+        <name>New_Clinic_Opt_In</name>
+        <label>New Clinic Opt-In?</label>
+        <locationX>182</locationX>
+        <locationY>278</locationY>
+        <defaultConnector>
+            <targetReference>Assign_new_values_to_person_account_0_0</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - update other fields as needed.</defaultConnectorLabel>
+        <rules>
+            <name>Yes_add_to_campaign</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Opt_in_to_New_Clinic_Info_Campaign</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_new_values_to_person_account_0</targetReference>
+            </connector>
+            <label>Yes - add to campaign</label>
+        </rules>
+    </decisions>
+    <description>Version of flow that runs on Consumer record page</description>
+    <formulas>
+        <description>Formula to either populate with new info provided in screen or to retain original value.</description>
+        <name>NewInsurance</name>
+        <dataType>String</dataType>
+        <expression>IF(
+NOT(
+  ISBLANK({!Input_insurance})
+), {!Input_insurance}, {!recordId.Account.Insurance__c})</expression>
+    </formulas>
+    <formulas>
+        <description>Variable to show datetime one year ago</description>
+        <name>OneYearAgo</name>
+        <dataType>DateTime</dataType>
+        <expression>DATETIMEVALUE(ADDMONTHS(Now(), -12))</expression>
+    </formulas>
+    <interviewLabel>Recommended Actions {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Recommended Actions</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creates a new Campaign Member relating the attached Account to the New Clinic Info campaign.</description>
+        <name>Create_New_Campaign_Member</name>
+        <label>Create New Campaign Member</label>
+        <locationX>50</locationX>
+        <locationY>638</locationY>
+        <connector>
+            <targetReference>Update_Person_Account</targetReference>
+        </connector>
+        <inputReference>NewCampaignMember</inputReference>
+    </recordCreates>
+    <recordUpdates>
+        <description>Updates the Person Account with the values assigned.</description>
+        <name>Update_Person_Account</name>
+        <label>Update Person Account</label>
+        <locationX>182</locationX>
+        <locationY>854</locationY>
+        <inputReference>AttachedPersonAccount</inputReference>
+    </recordUpdates>
+    <screens>
+        <description>Checklist screen showing important info to collect.</description>
+        <name>Checklist</name>
+        <label>Checklist</label>
+        <locationX>182</locationX>
+        <locationY>158</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>New_Clinic_Opt_In</targetReference>
+        </connector>
+        <fields>
+            <name>Insurance_Info_Collected</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Insurance:  {!recordId.Account.Insurance__c}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>NotEqualTo</operator>
+                    <rightValue>
+                        <stringValue></stringValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Insurance_Not_Collected</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Insurance: &lt;/b&gt;&lt;b style=&quot;color: rgb(240, 3, 3);&quot;&gt;Unknown!&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>or</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue></stringValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Input_insurance</name>
+            <dataType>String</dataType>
+            <fieldText>Input insurance</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>or</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue></stringValue>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>recordId.Account.Insurance__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Last_PCP_Visit_Recent</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Last PCP Visit: {!recordId.Account.Last_PCP_Visit__c}&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Last_PCP_Visit__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>false</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>No_Last_PCP</name>
+            <fieldText>&lt;p&gt;&lt;b style=&quot;color: rgb(247, 3, 3);&quot;&gt;No PCP Visit Yet!&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Last_PCP_Visit__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Schedule_New_Visit</name>
+            <dataType>DateTime</dataType>
+            <defaultValue>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </defaultValue>
+            <fieldText>Schedule New Visit</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>or</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.Last_PCP_Visit__c</leftValueReference>
+                    <operator>LessThanOrEqualTo</operator>
+                    <rightValue>
+                        <elementReference>OneYearAgo</elementReference>
+                    </rightValue>
+                </conditions>
+                <conditions>
+                    <leftValueReference>recordId.Account.Last_PCP_Visit__c</leftValueReference>
+                    <operator>IsNull</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Opted_In_New_clinic</name>
+            <fieldText>&lt;p&gt;&lt;b&gt;Opted-in to New Clinic Info Campaign!&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>recordId.Account.New_Clinic_Opt_In__c</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <booleanValue>true</booleanValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Opt_in_to_New_Clinic_Info_Campaign</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <elementReference>recordId.Account.New_Clinic_Opt_In__c</elementReference>
+            </defaultValue>
+            <fieldText>Opt in to New Clinic Info Campaign</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Socratic Health is opening a new clinic soon in this patient&#39;s area.  Ask them if you can opt them in to marketing communications about the new clinic!&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Checklist</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>The attached person account we need to update.</description>
+        <name>AttachedPersonAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>The new Campaign Member record we&#39;re creating.</description>
+        <name>NewCampaignMember</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>CampaignMember</objectType>
+    </variables>
+    <variables>
+        <description>Case we&#39;re starting from</description>
+        <name>recordId</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

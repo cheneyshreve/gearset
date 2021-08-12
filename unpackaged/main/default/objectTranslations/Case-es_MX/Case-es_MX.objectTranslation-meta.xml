@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <layouts>
+        <layout>Call Case</layout>
+        <sections>
+            <label><!-- Account &amp; Case Data --></label>
+            <section>Account &amp; Case Data</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Webform Case</layout>
+        <sections>
+            <label><!-- Account &amp; Case Data --></label>
+            <section>Account &amp; Case Data</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Create Account --></label>
+        <name>Create_Account</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Email --></label>
+        <name>CustomEmailAction</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Inbound Call --></label>
+        <name>Inbound_Call</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewChildCase --></label>
+        <name>NewChildCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Outbound Call --></label>
+        <name>Outbound_Call</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Send SMS --></label>
+        <name>Send_SMS</name>
+    </quickActions>
+    <recordTypes>
+        <description><!-- Record type to handle inbound and outbound calls --></description>
+        <label><!-- Call --></label>
+        <name>Call</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record Type to track consumer complaints and issues --></description>
+        <label><!-- Issue --></label>
+        <name>Issue</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type to handle voicemails and faxes routed through email 2 case --></description>
+        <label><!-- VM and Fax type --></label>
+        <name>VM_and_Fax_type</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Webform submission cases --></description>
+        <label><!-- Webform --></label>
+        <name>Webform</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- Record type to handle inbound webform submissions that require manual follow-up --></description>
+        <label><!-- WebformCase --></label>
+        <name>WebformCase</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Because you are moving this case to a Closed status, please select a &apos;Closed Reason.&apos; --></errorMessage>
+        <name>Call_Center_Case_Closed_Reason_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Because this case was manually entered, please enter a &apos;Description&apos; --></errorMessage>
+        <name>Require_Case_Description</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please select an &apos;In Progress Reason&apos; --></errorMessage>
+        <name>Require_In_Progress_Reason</name>
+    </validationRules>
+</CustomObjectTranslation>

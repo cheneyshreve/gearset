@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Patient_Benefactor__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The patient or prospect to whom this request is related</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The patient or prospect to whom this request is related</inlineHelpText>
+    <label>Patient/Benefactor</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipLabel>Advancement Requests</relationshipLabel>
+    <relationshipName>Advancement_Requests</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

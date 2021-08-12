@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Referral_Source__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Check this box if the related account was the referral source for the originating account.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Check this box if the related account was the referral source for the originating account.</inlineHelpText>
+    <label>Referral Source</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

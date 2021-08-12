@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>In_Progress_Reason_Wellness__c</fullName>
+    <externalId>false</externalId>
+    <label>In Progress Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Modified Quarantine (First Responders &amp; Healthcare Only)</fullName>
+                <default>false</default>
+                <label>Modified Quarantine (First Responders &amp; Healthcare Only)</label>
+            </value>
+            <value>
+                <fullName>Stay at Home Order</fullName>
+                <default>false</default>
+                <label>Stay at Home Order</label>
+            </value>
+            <value>
+                <fullName>Waiting to Hear from HRBP</fullName>
+                <default>false</default>
+                <label>Waiting to Hear from HRBP</label>
+            </value>
+            <value>
+                <fullName>Waiting_to_Hear_from_Survey_Respondent</fullName>
+                <default>false</default>
+                <label>Waiting to Hear from Survey Respondent</label>
+            </value>
+            <value>
+                <fullName>Survey Answer Clarification</fullName>
+                <default>false</default>
+                <label>Survey Answer Clarification</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

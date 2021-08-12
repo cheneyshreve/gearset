@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Area for the person creating an advancement request to specify what to do on behalf of the patient or benefactor. --></help>
+        <label><!-- Request Details --></label>
+        <name>Request_Details__c</name>
+    </CustomFieldTranslation>

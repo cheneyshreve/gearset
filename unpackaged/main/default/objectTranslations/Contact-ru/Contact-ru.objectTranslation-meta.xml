@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    
+    
+    
+    
+    
+    
+    
+    <quickActions>
+        <label><!-- Email --></label>
+        <name>CustomEmailAction</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Log Lunch &amp; Learn --></label>
+        <name>Log_Lunch_Learn</name>
+    </quickActions>
+    <recordTypes>
+        <description><!-- For all clinical users --></description>
+        <label><!-- Clinical --></label>
+        <name>Clinical</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- For all employees or representatives at an employer --></description>
+        <label><!-- Employer Representative --></label>
+        <name>Employer_Representative</name>
+    </recordTypes>
+    <recordTypes>
+        <description><!-- For all non-clinical users in a hospital or practice --></description>
+        <label><!-- Non-Clinical --></label>
+        <name>Non_Clinical</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooWeather --></label>
+        <name>YahooWeather</name>
+    </webLinks>
+</CustomObjectTranslation>

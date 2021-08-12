@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- In Progress Reason --></label>
+        <name>In_Progress_Reason_Wellness__c</name>
+        <picklistValues>
+            <masterLabel>Modified Quarantine (First Responders &amp; Healthcare Only)</masterLabel>
+            <translation><!-- Modified Quarantine (First Responders &amp; Healthcare Only) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stay at Home Order</masterLabel>
+            <translation><!-- Stay at Home Order --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Survey Answer Clarification</masterLabel>
+            <translation><!-- Survey Answer Clarification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting to Hear from HRBP</masterLabel>
+            <translation><!-- Waiting to Hear from HRBP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Waiting to Hear from Survey Respondent</masterLabel>
+            <translation><!-- Waiting to Hear from Survey Respondent --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

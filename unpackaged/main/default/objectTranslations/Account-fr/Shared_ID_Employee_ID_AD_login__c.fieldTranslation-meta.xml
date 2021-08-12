@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Shared ID (Employee ID, AD login) --></label>
+        <name>Shared_ID_Employee_ID_AD_login__c</name>
+    </CustomFieldTranslation>

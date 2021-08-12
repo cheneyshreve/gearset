@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Sends in the Last 6 Months --></label>
+        <name>Sends_in_the_Last_6_Months__c</name>
+    </CustomFieldTranslation>

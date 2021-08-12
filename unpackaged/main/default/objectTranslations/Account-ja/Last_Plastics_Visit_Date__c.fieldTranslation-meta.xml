@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Date of last plastics visit per Epic encounters --></help>
+        <label><!-- Last Plastics Visit Date --></label>
+        <name>Last_Plastics_Visit_Date__c</name>
+    </CustomFieldTranslation>

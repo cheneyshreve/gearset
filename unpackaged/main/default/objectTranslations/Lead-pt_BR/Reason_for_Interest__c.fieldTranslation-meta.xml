@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Reason for Interest --></label>
+        <name>Reason_for_Interest__c</name>
+        <picklistValues>
+            <masterLabel>Facility information</masterLabel>
+            <translation><!-- Facility information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General new patient inquiry</masterLabel>
+            <translation><!-- General new patient inquiry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Learn more about our Women&#39;s Health Physicians</masterLabel>
+            <translation><!-- Learn more about our Women&apos;s Health Physicians --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

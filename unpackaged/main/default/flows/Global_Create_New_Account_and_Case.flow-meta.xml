@@ -1,0 +1,1182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionCalls>
+        <description>Closes the action screen since the flow is complete</description>
+        <name>Close_Action</name>
+        <label>Close Action</label>
+        <locationX>2307</locationX>
+        <locationY>677</locationY>
+        <actionName>c:Cured_CloseQuickAction</actionName>
+        <actionType>component</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+    </actionCalls>
+    <actionCalls>
+        <description>Action that emails the specified list of email addresses with the duplicate record encountered.</description>
+        <name>Email_system_admin</name>
+        <label>Email system admin</label>
+        <locationX>2094</locationX>
+        <locationY>502</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Navigate_to_new_Case</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>EmailBodyTemplate</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <stringValue>jesse@cured.health</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Duplicate Person Accounts Identified</stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <description>Action that navigates user to new case created.</description>
+        <name>Navigate_to_new_Case</name>
+        <label>Navigate to new Case</label>
+        <locationX>2198</locationX>
+        <locationY>677</locationY>
+        <actionName>c:Cured_NavigateToRecord</actionName>
+        <actionType>component</actionType>
+        <connector>
+            <targetReference>Close_Action</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>recordId</name>
+            <value>
+                <elementReference>CaseToCreate.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <actionCalls>
+        <description>Action to run a SOQL query looking for an Account with the MRN we specified</description>
+        <name>Query_for_MRN</name>
+        <label>Query for MRN</label>
+        <locationX>926</locationX>
+        <locationY>407</locationY>
+        <actionName>ExecuteSOQL</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Query_found_matching_account</targetReference>
+        </connector>
+        <dataTypeMappings>
+            <typeName>U__sObjects</typeName>
+            <typeValue>Account</typeValue>
+        </dataTypeMappings>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>soqlQuery</name>
+            <value>
+                <stringValue>{!MRN_Query}&#39;{!MRNtoAdd}&#39; LIMIT 1</stringValue>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>QueriedAccounts</assignToReference>
+            <name>sObjects</name>
+        </outputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <description>Assigns the remaining fields to the Case that are only relevant if the case is Escalated.</description>
+        <name>Assign_Escalation_Information</name>
+        <label>Assign Escalation Information</label>
+        <locationX>1620</locationX>
+        <locationY>562</locationY>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.IsEscalated</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Escalated_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Escalation_Reason</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Case_from_Variables</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the attributes of a new Case to create using both input variables from the screen and known defaults.</description>
+        <name>Assign_input_values_to_new_Case</name>
+        <label>Assign input values to new Case</label>
+        <locationX>1349</locationX>
+        <locationY>668</locationY>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.AccountId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_New_Person_Account.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.ContactId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_New_Person_Account.PersonContactId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_case_status</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.In_Progress_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>In_Progress_reason</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Reason</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_case_reason_qc.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Declined_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_decline_reason</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Origin</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Phone</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Closed_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_closed_reason_qc.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.Caller__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_a_caller_qc.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CaseToCreate.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>0124R000001NsVkQAK</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Check_for_escalation</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the values just inputted on the last screen to the Person Account variable we will use to create an account.</description>
+        <name>Assign_input_values_to_Person_Account_variable</name>
+        <label>Assign input values to Person Account variable</label>
+        <locationX>851</locationX>
+        <locationY>665</locationY>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.FirstName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProspectName.firstName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.LastName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProspectName.lastName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.PersonEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProspectEmail.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.Phone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProspectPhone.value</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.IsPersonAccount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.PersonBirthdate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Birthdate</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.RecordTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>0124R0000014mX9QAI</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>MRN_populated_on_previous_screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the newly selected MRN Retry value to the MRNtoAdd variable, so that we can once again query to find out if the updated MRN exists.</description>
+        <name>Assign_MRN_Retry_value_to_MRNtoAdd</name>
+        <label>Assign MRN Retry value to MRNtoAdd</label>
+        <locationX>938</locationX>
+        <locationY>277</locationY>
+        <assignmentItems>
+            <assignToReference>MRNtoAdd</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRN_Retry</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Query_for_MRN</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the MRN specified in the flow to the patient Account.</description>
+        <name>Assign_MRN_to_Patient_Account</name>
+        <label>Assign MRN to Patient Account</label>
+        <locationX>1055</locationX>
+        <locationY>552</locationY>
+        <assignmentItems>
+            <assignToReference>CreatedPersonAccount.MRN__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRNtoAdd</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Person_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Sets the value that the end user populated in the MRN field to the MRNtoAdd variable. We do this to help us with our query.</description>
+        <name>Assign_MRN_value_to_MRNtoAdd_variable</name>
+        <label>Assign MRN value to MRNtoAdd variable</label>
+        <locationX>813</locationX>
+        <locationY>407</locationY>
+        <assignmentItems>
+            <assignToReference>MRNtoAdd</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MRN</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Query_for_MRN</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Logs a call on the created case</description>
+        <name>Log_A_Call</name>
+        <label>Log A Call</label>
+        <locationX>1837</locationX>
+        <locationY>666</locationY>
+        <assignmentItems>
+            <assignToReference>TaskRecord.ActivityDate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>TaskRecord.WhoId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_New_Person_Account.PersonContactId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>TaskRecord.WhatId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>CaseToCreate.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>TaskRecord.Call_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Inbound</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>TaskRecord.Description</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Call_Notes</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>TaskRecord.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>New Patient - {!Call_Notes}</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_a_Task</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Variable to determine whether we need to send an email to the system admin about potential duplicate accounts</description>
+        <name>NeedToSendEmail</name>
+        <label>NeedToSendEmail</label>
+        <locationX>1162</locationX>
+        <locationY>313</locationY>
+        <assignmentItems>
+            <assignToReference>SendEmail</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Person_Account</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>We are setting a record variable to equal the Account we returned in our query. This assignment step takes place in a loop but we can have a maximum of one returned Account (for two reasons: MRN is a unique external ID and since we have a limit 1 on our query).</description>
+        <name>Set_QueriedAccount_to_the_returned_Account</name>
+        <label>Set QueriedAccount to the returned Account</label>
+        <locationX>576</locationX>
+        <locationY>235</locationY>
+        <assignmentItems>
+            <assignToReference>QueriedAccount</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_through_returned_Accounts</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_through_returned_Accounts</targetReference>
+        </connector>
+    </assignments>
+    <choices>
+        <description>Hardcoded &quot;Closed&quot; value to show up as a choice; helps prevent &quot;New&quot; from showing up as a choice</description>
+        <name>CaseStatusClosed</name>
+        <choiceText>Closed</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Closed</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Escalated status</description>
+        <name>CaseStatusEscalated</name>
+        <choiceText>Escalated</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Escalated</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <description>Hardcoded &quot;In Progress&quot; choice, used to prevent &quot;New&quot; from appearing on screen flow</description>
+        <name>CaseStatusInProgress</name>
+        <choiceText>In Progress</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>In Progress</stringValue>
+        </value>
+    </choices>
+    <decisions>
+        <description>Decision point to check for whether an agent has indicated a case is to be escalated.  If so, we will perform slightly different operations.</description>
+        <name>Check_for_escalation</name>
+        <label>Check for escalation</label>
+        <locationX>1442</locationX>
+        <locationY>669</locationY>
+        <defaultConnector>
+            <targetReference>Create_Case_from_Variables</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not escalated</defaultConnectorLabel>
+        <rules>
+            <name>Escalated</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Choose_case_status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Escalated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Escalation_Information</targetReference>
+            </connector>
+            <label>Escalated?</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision point to check whether the end user chose to try an MRN again or move on and alert the system administrator that two records should be merged.</description>
+        <name>Check_whether_Retry_was_selected</name>
+        <label>Check whether Retry was selected</label>
+        <locationX>1148</locationX>
+        <locationY>50</locationY>
+        <defaultConnector>
+            <targetReference>NeedToSendEmail</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Just finish</defaultConnectorLabel>
+        <rules>
+            <name>Retry_selected</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Retry.value</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_MRN_Retry_value_to_MRNtoAdd</targetReference>
+            </connector>
+            <label>Retry selected</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision point to determine whether we need to send an email or not, based on the boolean variable that was set in the MRN entry flow</description>
+        <name>Do_we_need_to_send_email</name>
+        <label>Do we need to send email?</label>
+        <locationX>2031</locationX>
+        <locationY>658</locationY>
+        <defaultConnector>
+            <targetReference>Navigate_to_new_Case</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No need for an email</defaultConnectorLabel>
+        <rules>
+            <name>Send_an_email_about_possible_duplicates</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>SendEmail</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Email_system_admin</targetReference>
+            </connector>
+            <label>Send an email about possible duplicates</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Was the MRN populated on the previous screen?</description>
+        <name>MRN_populated_on_previous_screen</name>
+        <label>MRN populated on previous screen?</label>
+        <locationX>964</locationX>
+        <locationY>667</locationY>
+        <defaultConnector>
+            <targetReference>Create_Person_Account</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - Person Account does not need MRN</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Need_to_update_person_account</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>MRN</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>MRN</leftValueReference>
+                <operator>NotEqualTo</operator>
+                <rightValue>
+                    <stringValue></stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_MRN_value_to_MRNtoAdd_variable</targetReference>
+            </connector>
+            <label>Yes - Need to update person account</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision point to check to see whether the previous query found an existing Account with the MRN we provided</description>
+        <name>Query_found_matching_account</name>
+        <label>Query found matching account?</label>
+        <locationX>1020</locationX>
+        <locationY>409</locationY>
+        <defaultConnector>
+            <targetReference>Assign_MRN_to_Patient_Account</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - add MRN to Account</defaultConnectorLabel>
+        <rules>
+            <name>Yes_error_and_warning</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>QueriedAccounts</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Loop_through_returned_Accounts</targetReference>
+            </connector>
+            <label>Yes - error and warning</label>
+        </rules>
+    </decisions>
+    <description>Quick action plus lightning component to display from Global Action - Create new Account and inbound call case on one screen.</description>
+    <dynamicChoiceSets>
+        <name>ActivityCallResultChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Call_Result__c</picklistField>
+        <picklistObject>Task</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <description>Call Type picklist from the Activity object</description>
+        <name>Activitycalltype</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Call_Type__c</picklistField>
+        <picklistObject>Task</picklistObject>
+        <sortOrder>Desc</sortOrder>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CallAnsweredChoices</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Call_Answered__c</picklistField>
+        <picklistObject>Task</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CallResultChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Call_Result__c</picklistField>
+        <picklistObject>Task</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CaseClosedReasonChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Closed_Reason__c</picklistField>
+        <picklistObject>Case</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CaseDeclineReasonChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Declined_Reason__c</picklistField>
+        <picklistObject>Case</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CaseReasonChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Reason</picklistField>
+        <picklistObject>Case</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>CaseStatusChoice</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Status</picklistField>
+        <picklistObject>Case</picklistObject>
+        <sortOrder>Desc</sortOrder>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <description>User chooses location to put on case</description>
+        <name>ChooseLocation</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true" />
+        <object xsi:nil="true" />
+        <picklistField>Location__c</picklistField>
+        <picklistObject>Case</picklistObject>
+    </dynamicChoiceSets>
+    <interviewLabel>Global - Create New Account and Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>New Prospect</label>
+    <loops>
+        <description>Query returns a List of sObjects (which we are treating as a List of Accounts). We know we can only ever have one matching Account, but we still need to loop through the List of one Account to find the real output. We are doing this so that we can get individual fields from the returned Account that we can then use in an email and error message.</description>
+        <name>Loop_through_returned_Accounts</name>
+        <label>Loop through returned Accounts</label>
+        <locationX>741</locationX>
+        <locationY>275</locationY>
+        <collectionReference>QueriedAccounts</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Set_QueriedAccount_to_the_returned_Account</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>ErrorScreen</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>FREE_FORM_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <description>Creates the call task</description>
+        <name>Create_a_Task</name>
+        <label>Create a Task</label>
+        <locationX>1950</locationX>
+        <locationY>667</locationY>
+        <connector>
+            <targetReference>Do_we_need_to_send_email</targetReference>
+        </connector>
+        <inputReference>TaskRecord</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <description>Creates Inbound Call Case based on input from screen</description>
+        <name>Create_Case_from_Variables</name>
+        <label>Create Case from Variables</label>
+        <locationX>1720</locationX>
+        <locationY>667</locationY>
+        <connector>
+            <targetReference>Log_A_Call</targetReference>
+        </connector>
+        <inputReference>CaseToCreate</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <description>Creates a person account based on the input from the first screen</description>
+        <name>Create_Person_Account</name>
+        <label>Create Person Account</label>
+        <locationX>1154</locationX>
+        <locationY>668</locationY>
+        <connector>
+            <targetReference>Get_New_Person_Account</targetReference>
+        </connector>
+        <inputReference>CreatedPersonAccount</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <description>Step to retrieve the new person account record we just created.</description>
+        <name>Get_New_Person_Account</name>
+        <label>Get New Person Account</label>
+        <locationX>1254</locationX>
+        <locationY>667</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Assign_input_values_to_new_Case</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>CreatedPersonAccount.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <runInMode>SystemModeWithoutSharing</runInMode>
+    <screens>
+        <description>Screen to show that due to an existing MRN we have run into an error.</description>
+        <name>ErrorScreen</name>
+        <label>ErrorScreen</label>
+        <locationX>629</locationX>
+        <locationY>94</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Check_whether_Retry_was_selected</targetReference>
+        </connector>
+        <fields>
+            <name>ErrorText</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Uh-oh!  That MRN, {!MRN}, is already assigned to another patient, {!QueriedAccount.Name}.  Please double check your entry.  If correct, just click Next and IT will be notified to resolve the issue. &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;If incorrect, enter a new MRN below and select &quot;retry&quot;.&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>MRN_Retry</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <elementReference>MRN</elementReference>
+            </defaultValue>
+            <fieldText>MRN Retry</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Retry</name>
+            <extensionName>flowruntime:toggle</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Retry</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleActive</name>
+                <value>
+                    <stringValue>Retry this MRN</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>messageToggleInactive</name>
+                <value>
+                    <stringValue>Finish without retry</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Log_a_CallScreenOne</name>
+        <label>Log a Call</label>
+        <locationX>636</locationX>
+        <locationY>665</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>New_Prospect2</targetReference>
+        </connector>
+        <fields>
+            <name>ProspectName</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>lastName</name>
+                <value>
+                    <stringValue>Unknown</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>ProspectPhone</name>
+            <extensionName>flowruntime:phone</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>ProspectEmail</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Birthdate</name>
+            <dataType>Date</dataType>
+            <fieldText>Birthdate</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Screen Two of the New Prospect</description>
+        <name>New_Prospect2</name>
+        <label>New Prospect</label>
+        <locationX>742</locationX>
+        <locationY>665</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_input_values_to_Person_Account_variable</targetReference>
+        </connector>
+        <fields>
+            <name>Choose_a_caller_qc</name>
+            <extensionName>c:fsc_quickChoiceFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>displayMode</name>
+                <value>
+                    <stringValue>Picklist</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>inputMode</name>
+                <value>
+                    <stringValue>Picklist Field</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectName</name>
+                <value>
+                    <stringValue>Case</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldName</name>
+                <value>
+                    <stringValue>Caller__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>masterLabel</name>
+                <value>
+                    <stringValue>Choose a caller</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>recordTypeId</name>
+                <value>
+                    <stringValue>0124R000001NsVk</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Choose_case_reason_qc</name>
+            <extensionName>c:fsc_quickChoiceFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>displayMode</name>
+                <value>
+                    <stringValue>Picklist</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>inputMode</name>
+                <value>
+                    <stringValue>Picklist Field</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectName</name>
+                <value>
+                    <stringValue>Case</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldName</name>
+                <value>
+                    <stringValue>Reason</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>masterLabel</name>
+                <value>
+                    <stringValue>Choose case reason</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <fields>
+            <name>Choose_case_status</name>
+            <choiceReferences>CaseStatusClosed</choiceReferences>
+            <choiceReferences>CaseStatusInProgress</choiceReferences>
+            <choiceReferences>CaseStatusEscalated</choiceReferences>
+            <dataType>String</dataType>
+            <defaultSelectedChoiceReference>CaseStatusClosed</defaultSelectedChoiceReference>
+            <fieldText>Choose case status</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Choose_closed_reason_qc</name>
+            <extensionName>c:fsc_quickChoiceFSC</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>displayMode</name>
+                <value>
+                    <stringValue>Picklist</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>inputMode</name>
+                <value>
+                    <stringValue>Picklist Field</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>objectName</name>
+                <value>
+                    <stringValue>Case</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>fieldName</name>
+                <value>
+                    <stringValue>Closed_Reason__c</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>required</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>masterLabel</name>
+                <value>
+                    <stringValue>Choose closed reason</stringValue>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Choose_case_status</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>CaseStatusClosed</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Choose_decline_reason</name>
+            <choiceReferences>CaseDeclineReasonChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Choose decline reason</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Choose_closed_reason_qc.value</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Declined Appointment</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Escalation_Reason</name>
+            <dataType>String</dataType>
+            <fieldText>Escalation Reason</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Choose_case_status</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>Escalated</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>In_Progress_reason</name>
+            <dataType>String</dataType>
+            <fieldText>In Progress reason</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>Choose_case_status</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <stringValue>In Progress</stringValue>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>Call_Notes</name>
+            <dataType>String</dataType>
+            <fieldText>Optional - Call Notes</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>MRN_Reminder</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(62, 62, 60); background-color: rgb(255, 255, 255);&quot;&gt;This person&#39;s account does not yet have an MRN associated with it in Salesforce.  If they have one in Epic, remember to add it below!&lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>MRN</name>
+            <dataType>String</dataType>
+            <fieldText>MRN</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>51</locationX>
+        <locationY>648</locationY>
+        <connector>
+            <targetReference>Log_a_CallScreenOne</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <description>Template to build an email we send to the system admins to ask them to merge two duplicate accounts.</description>
+        <name>EmailBodyTemplate</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>An agent attempted to log MRN number {!MRNtoAdd} onto the account {!CreatedPersonAccount.FirstName} {!CreatedPersonAccount.LastName} with the ID {!CreatedPersonAccount.Id}.
+This MRN is already present on the account {!QueriedAccount.Name}, with the ID {!QueriedAccount.Id}.
+Please review and consider merging the two accounts.</text>
+    </textTemplates>
+    <variables>
+        <name>CaseToCreate</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>Person account created based on input from screen flow</description>
+        <name>CreatedPersonAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>Query to use (in combination with the MRNtoAdd variable) to find any Account with the suggested MRN already assigned.</description>
+        <name>MRN_Query</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>SELECT Id, Name, MRN__c FROM Account WHERE MRN__c = </stringValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Variable to show the MRN we actually stamp onto the account. Will be set to either MRN or retry MRN as necessary.</description>
+        <name>MRNtoAdd</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>Variable to represent the Account we queried that already has the MRN specified.</description>
+        <name>QueriedAccount</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>The List variable representing the List of one Account that we found in a query.</description>
+        <name>QueriedAccounts</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <description>This is the case ID for the related case, passed in to the flow</description>
+        <name>recordId</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <description>Variable to determine whether we should send an email to system admins about a potential duplicate</description>
+        <name>SendEmail</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <booleanValue>false</booleanValue>
+        </value>
+    </variables>
+    <variables>
+        <description>Creates task for call</description>
+        <name>TaskRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Task</objectType>
+    </variables>
+</Flow>

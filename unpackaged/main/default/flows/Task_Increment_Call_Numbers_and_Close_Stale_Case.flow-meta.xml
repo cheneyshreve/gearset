@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <assignments>
+        <description>Assigns Closed value to the Status field and Could Not Reach value to the Closed Reason field.</description>
+        <name>Assign_Closed_Status_and_Closed_Reason</name>
+        <label>Assign Closed Status and Closed Reason</label>
+        <locationX>50</locationX>
+        <locationY>853</locationY>
+        <assignmentItems>
+            <assignToReference>Get_related_case.Closed_Reason__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Could Not Reach</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Get_related_case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Closed</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Assigns the &quot;In Progress&quot; Status since a call has been logged to the case</description>
+        <name>Assign_In_Progress_Status</name>
+        <label>Assign In Progress Status</label>
+        <locationX>314</locationX>
+        <locationY>973</locationY>
+        <assignmentItems>
+            <assignToReference>Get_related_case.Status</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>In Progress</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Update_case</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <description>Increment number of calls on case</description>
+        <name>Assign_new_number_of_calls</name>
+        <label>Assign new number of calls</label>
+        <locationX>248</locationX>
+        <locationY>613</locationY>
+        <assignmentItems>
+            <assignToReference>Get_related_case.of_Call_Attempts__c</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Does_this_put_the_case_at_3_calls</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <description>Decision step to check to see if this is the right type of case (webform case) and</description>
+        <name>Does_case_have_number_of_calls_three_or_under</name>
+        <label>Does case have number of calls three or under?</label>
+        <locationX>501</locationX>
+        <locationY>493</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Open_Webform_Case_with_Fewer_than_Three_Calls</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_related_case.of_Call_Attempts__c</leftValueReference>
+                <operator>LessThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>2.0</numberValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_related_case.ClosedDate</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_new_number_of_calls</targetReference>
+            </connector>
+            <label>Open Webform Case with Fewer than Three Calls</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision step to check to see if Case has three calls logged yet.  If so, we will close the case.</description>
+        <name>Does_this_put_the_case_at_3_calls</name>
+        <label>Does this put the case at 3 calls?</label>
+        <locationX>248</locationX>
+        <locationY>733</locationY>
+        <defaultConnector>
+            <targetReference>Is_Status_still_New_or_Working</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Case does not yet have three calls logged</defaultConnectorLabel>
+        <rules>
+            <name>Case_now_has_three_calls_logged</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_related_case.of_Call_Attempts__c</leftValueReference>
+                <operator>GreaterThanOrEqualTo</operator>
+                <rightValue>
+                    <numberValue>3.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Closed_Status_and_Closed_Reason</targetReference>
+            </connector>
+            <label>Case now has three calls logged</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Checks to see if Case Status is still set to New - updates to In Progress if so</description>
+        <name>Is_Status_still_New_or_Working</name>
+        <label>Is Status still &quot;New&quot; or &quot;Working&quot;?</label>
+        <locationX>446</locationX>
+        <locationY>853</locationY>
+        <defaultConnector>
+            <targetReference>Update_case</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No - proceed with flow</defaultConnectorLabel>
+        <rules>
+            <name>Yes_Status_should_Change_to_In_Progress</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>Get_related_case.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>Get_related_case.Status</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Working</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_In_Progress_Status</targetReference>
+            </connector>
+            <label>Yes - Status should Change to In Progress</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <description>Decision point to check whether this task is associated with a case and if the task is a completed call task.</description>
+        <name>Is_this_a_call_task_on_a_case</name>
+        <label>Is this a call task on a case?</label>
+        <locationX>715</locationX>
+        <locationY>253</locationY>
+        <defaultConnectorLabel>Task does not meet criteria - end flow</defaultConnectorLabel>
+        <rules>
+            <name>Task_meets_criteria</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.WhatId</leftValueReference>
+                <operator>StartsWith</operator>
+                <rightValue>
+                    <stringValue>500</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>$Record.Call_Type__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Outbound</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Get_related_case</targetReference>
+            </connector>
+            <label>Task meets criteria</label>
+        </rules>
+    </decisions>
+    <description>Record-launched flow that updates call numbers on Case and closes cases after 3 failed attempts to contact.</description>
+    <interviewLabel>Task - Increment Call Numbers and Close Stale Case {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Task - Increment Call Numbers and Close Stale Case</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <description>Gets the related case record</description>
+        <name>Get_related_case</name>
+        <label>Get related case</label>
+        <locationX>501</locationX>
+        <locationY>373</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Does_case_have_number_of_calls_three_or_under</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>$Record.WhatId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Case</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordUpdates>
+        <description>Updates the case with the incremented number of calls (and with the closed reason if appropriate).</description>
+        <name>Update_case</name>
+        <label>Update case</label>
+        <locationX>248</locationX>
+        <locationY>1285</locationY>
+        <inputReference>Get_related_case</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>589</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Is_this_a_call_task_on_a_case</targetReference>
+        </connector>
+        <object>Task</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <variables>
+        <description>Original number on case call attempts</description>
+        <name>OriginalCallAttemptsNumber</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <elementReference>Get_related_case.of_Call_Attempts__c</elementReference>
+        </value>
+    </variables>
+</Flow>

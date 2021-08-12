@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Indicates that this person is part of a corporate partnerships program. --></help>
+        <label><!-- Corporate Partnership --></label>
+        <name>Corporate_Partnership__c</name>
+    </CustomFieldTranslation>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Account_Has_Photo__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox that is checked in Flow whenever the Account Photo field is populated on an Account.  Then we can use this checkbox for component visibility.</description>
+    <externalId>false</externalId>
+    <label>Account Has Photo?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

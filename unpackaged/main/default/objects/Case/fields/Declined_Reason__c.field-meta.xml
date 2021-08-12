@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Declined_Reason__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>This field only needs to be populated if &quot;Declined&quot; is chosen for the &quot;Closed Reason&quot; field</inlineHelpText>
+    <label>Declined Reason</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Appointment Too Far in the Future</fullName>
+                <default>false</default>
+                <label>Appointment Too Far in the Future</label>
+            </value>
+            <value>
+                <fullName>Location Not Convenient</fullName>
+                <default>false</default>
+                <label>Location Not Convenient</label>
+            </value>
+            <value>
+                <fullName>No Insurance</fullName>
+                <default>false</default>
+                <label>No Insurance</label>
+            </value>
+            <value>
+                <fullName>Not Eligible</fullName>
+                <default>false</default>
+                <label>Not Eligible</label>
+            </value>
+            <value>
+                <fullName>Patient Changed Mind</fullName>
+                <default>false</default>
+                <label>Patient Changed Mind</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

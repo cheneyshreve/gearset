@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Providers</fullName>
+    <columns>PC_LAST_NAME</columns>
+    <columns>PC_FIRST_NAME</columns>
+    <columns>Specialty__c</columns>
+    <columns>PC_EMAIL</columns>
+    <columns>Primary_Practice__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ACCOUNT.RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PersonAccount.Provider</value>
+    </filters>
+    <label>Providers</label>
+</ListView>

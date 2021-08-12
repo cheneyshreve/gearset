@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Call Result --></label>
+        <name>Call_Result__c</name>
+        <picklistValues>
+            <masterLabel>- Choose a call result -</masterLabel>
+            <translation><!-- - Choose a call result - --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Busy Signal</masterLabel>
+            <translation><!-- Busy Signal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Person Answered</masterLabel>
+            <translation><!-- Person Answered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Voicemail</masterLabel>
+            <translation><!-- Voicemail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wrong Number</masterLabel>
+            <translation><!-- Wrong Number --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

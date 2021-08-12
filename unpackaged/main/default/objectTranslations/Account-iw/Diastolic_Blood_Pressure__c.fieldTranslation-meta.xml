@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Diastolic blood pressure as taken in last face-to-face visit --></help>
+        <label><!-- Diastolic Blood Pressure --></label>
+        <name>Diastolic_Blood_Pressure__c</name>
+    </CustomFieldTranslation>

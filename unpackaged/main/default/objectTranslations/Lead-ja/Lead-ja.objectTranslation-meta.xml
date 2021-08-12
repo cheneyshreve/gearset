@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    
+    
+    
+    
+    
+    
+    
+    <quickActions>
+        <label><!-- Field Update_Clinical/Care Management Criteria --></label>
+        <name>Field_Update_Clinical_Care_Management_Criteria</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Disease_Management --></label>
+        <name>Field_Update_Disease_Management</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_IT Criteria --></label>
+        <name>Field_Update_IT_Criteria</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Field Update_Operational Criteria --></label>
+        <name>Field_Update_Operational_Criteria</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Prospect --></label>
+        <name>Prospect</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Web Form --></label>
+        <name>Web_Form</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+</CustomObjectTranslation>

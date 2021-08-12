@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <assignments>
+        <description>Checks the checkbox on Account to show we have a photo now.</description>
+        <name>Check_the_box</name>
+        <label>Check the box</label>
+        <locationX>50</locationX>
+        <locationY>431</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Account_Has_Photo__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <description>Decision point that checks whether Account Photo field is null.  If not, checks the box that drives component visibility on the lightning record page.</description>
+        <name>Does_Account_have_Photo</name>
+        <label>Does Account have Photo?</label>
+        <locationX>182</locationX>
+        <locationY>311</locationY>
+        <defaultConnectorLabel>Nope - don&#39;t check box</defaultConnectorLabel>
+        <rules>
+            <name>Photo_populated_check_box</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.Account_Photo__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>false</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_the_box</targetReference>
+            </connector>
+            <label>Photo populated - check box</label>
+        </rules>
+    </decisions>
+    <description>Flow that runs before update, looks for a photo populated in the rich text field Account Photo and checks a box if so.  This allows us to display it in a related record component conditionally. Never been used in a customer org</description>
+    <interviewLabel>Account - Check Box to Display Photo If Available {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Account - Check Box to Display Photo If Available</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>56</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Does_Account_have_Photo</targetReference>
+        </connector>
+        <object>Account</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

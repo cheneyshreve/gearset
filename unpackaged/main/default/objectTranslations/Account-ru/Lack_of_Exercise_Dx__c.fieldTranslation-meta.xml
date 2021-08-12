@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Automatically set to yes (checked) if specified diagnoses are in the patient&apos;s diagnosis list and present within the last year --></help>
+        <label><!-- Lack of Exercise Dx --></label>
+        <name>Lack_of_Exercise_Dx__c</name>
+    </CustomFieldTranslation>

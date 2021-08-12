@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Patient__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Checkbox indicates status as a patient. Check = Patient, unchecked = non-patient or unsure. Automatically checked if MRN field is populated</description>
+    <externalId>false</externalId>
+    <inlineHelpText>Checkbox indicates status as a patient. Check = Patient, unchecked = non-patient or unsure</inlineHelpText>
+    <label>Is Patient?</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

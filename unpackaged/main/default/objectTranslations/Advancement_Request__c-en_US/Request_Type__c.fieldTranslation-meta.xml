@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Picklist field used to group advancement requests into categories for aid in reporting. --></help>
+        <label><!-- Request Type --></label>
+        <name>Request_Type__c</name>
+        <picklistValues>
+            <masterLabel>Replace for each customer</masterLabel>
+            <translation><!-- Replace for each customer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scheduling Help</masterLabel>
+            <translation><!-- Scheduling Help --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Second Opinion</masterLabel>
+            <translation><!-- Second Opinion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Special Treatment</masterLabel>
+            <translation><!-- Special Treatment --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Date of last flu shot per Epic CPT codes --></help>
+        <label><!-- Last Flu Shot Date --></label>
+        <name>Last_Flu_Shot_Date__c</name>
+    </CustomFieldTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Picklist containing various departments, campuses, or offices from which the request may have originated.  Picklist values will always be specific to customer&apos;s use case. --></help>
+        <label><!-- Campus/Office of Requester --></label>
+        <name>Campus_Office_of_Requester__c</name>
+        <picklistValues>
+            <masterLabel>Replace for each customer</masterLabel>
+            <translation><!-- Replace for each customer --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

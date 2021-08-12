@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Routing Comments from Epic Inbasket record. --></help>
+        <label><!-- Routing Comments --></label>
+        <name>Routing_Comments__c</name>
+    </CustomFieldTranslation>

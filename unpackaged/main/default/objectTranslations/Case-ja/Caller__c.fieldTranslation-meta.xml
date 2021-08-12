@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <label><!-- Caller --></label>
+        <name>Caller__c</name>
+        <picklistValues>
+            <masterLabel>Guardian</masterLabel>
+            <translation><!-- Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Insurance Carrier</masterLabel>
+            <translation><!-- Insurance Carrier --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Junk/Robo-Fax</masterLabel>
+            <translation><!-- Junk/Robo-Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Patient/Prospect</masterLabel>
+            <translation><!-- Patient/Prospect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Payor</masterLabel>
+            <translation><!-- Payor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pharmacy</masterLabel>
+            <translation><!-- Pharmacy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider/Physician Office</masterLabel>
+            <translation><!-- Provider/Physician Office --></translation>
+        </picklistValues>
+    </CustomFieldTranslation>

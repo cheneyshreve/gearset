@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Notes field for the person to whom this request is assigned. --></help>
+        <label><!-- Ongoing Notes --></label>
+        <name>Ongoing_Notes__c</name>
+    </CustomFieldTranslation>

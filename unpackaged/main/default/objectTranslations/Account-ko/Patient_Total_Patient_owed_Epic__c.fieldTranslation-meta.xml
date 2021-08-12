@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Summary of total patient owed amount from past 2 years --></help>
+        <label><!-- Patient - Total Patient owed - Epic --></label>
+        <name>Patient_Total_Patient_owed_Epic__c</name>
+    </CustomFieldTranslation>

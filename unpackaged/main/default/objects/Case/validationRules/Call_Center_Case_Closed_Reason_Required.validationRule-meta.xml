@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Call_Center_Case_Closed_Reason_Required</fullName>
+    <active>true</active>
+    <description>This rule requires a closed reason if the status changes to closed</description>
+    <errorConditionFormula>AND(
+NOT($RecordType.Name = &quot;Wellness Tracking&quot;),
+ISPICKVAL( Closed_Reason__c,&quot;&quot;),
+ISPICKVAL(Status, &quot;Closed&quot;))</errorConditionFormula>
+    <errorMessage>Because you are moving this case to a Closed status, please select a &#39;Closed Reason.&#39;</errorMessage>
+</ValidationRule>

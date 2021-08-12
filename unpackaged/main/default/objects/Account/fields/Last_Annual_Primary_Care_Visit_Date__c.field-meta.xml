@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Last_Annual_Primary_Care_Visit_Date__c</fullName>
+    <description>Date of last annual primary care visit per Epic CPT codes</description>
+    <encryptionScheme>None</encryptionScheme>
+    <externalId>false</externalId>
+    <inlineHelpText>Date of last annual primary care visit per Epic CPT codes</inlineHelpText>
+    <label>Last Annual Primary Care Visit Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

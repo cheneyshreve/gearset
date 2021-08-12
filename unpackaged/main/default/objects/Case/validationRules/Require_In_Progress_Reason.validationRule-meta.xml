@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Require_In_Progress_Reason</fullName>
+    <active>true</active>
+    <description>Requires an In Progress Reason if status = In Progress</description>
+    <errorConditionFormula>AND( 
+$RecordType.Name = &quot;Wellness Tracking&quot;, 
+ISBLANK(TEXT( In_Progress_Reason_Wellness__c )), 
+ISPICKVAL(Status, &quot;In Progress&quot;))</errorConditionFormula>
+    <errorMessage>Please select an &#39;In Progress Reason&#39;</errorMessage>
+</ValidationRule>

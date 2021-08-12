@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- Date on which the person&apos;s Wealth Score was last updated. --></help>
+        <label><!-- Wealth Score Last Updated --></label>
+        <name>Wealth_Score_Last_Updated__c</name>
+    </CustomFieldTranslation>

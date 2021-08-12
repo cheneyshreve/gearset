@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomFieldTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+        <help><!-- The patient or prospect to whom this request is related --></help>
+        <label><!-- Patient/Benefactor --></label>
+        <name>Patient_Benefactor__c</name>
+        <relationshipLabel><!-- Advancement Requests --></relationshipLabel>
+    </CustomFieldTranslation>
